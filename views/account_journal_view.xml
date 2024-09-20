@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Botón en el diario para abrir el listado de pagos pendientes -->
+    <record id="view_account_journal_form_inherit" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit.pending.payments</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <!-- El botón se mostrará solo si el tipo de diario es 'bank' (Banco) o 'cash' (Efectivo) -->
+                <button name="action_get_pending_payments" type="object" string="Traer pagos pendientes" class="btn-primary" icon="fa-paperclip"
+                    attrs="{'invisible': [('type', 'not in', ['bank', 'cash'])]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
